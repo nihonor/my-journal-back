@@ -10,8 +10,9 @@ const tradeSchema = new mongoose.Schema({
     stop_loss: { type: Number },
     take_profit: { type: Number },
     profit_loss: { type: Number }, // Calculated P/L
-    risk_reward: { type: Number }, // Calculated R:R
+    risk_reward: { type: String }, // Storing as string "1:2.5" 
     notes: { type: String },
+    emotion: { type: String }, // Confident, Nervous, etc.
     status: { type: String, enum: ['Open', 'Closed', 'Pending'], default: 'Open' },
     trade_date: { type: Date, default: Date.now },
 }, { timestamps: true }); // Adds createdAt and updatedAt automatically
