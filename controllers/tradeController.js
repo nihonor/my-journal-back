@@ -7,11 +7,7 @@ const calculateTradeData = (tradeData) => {
     let status = tradeData.status || 'Open';
 
     if (exit_price) {
-        // Simplified P/L calculation for Forex/Crypto (Standard lots assumption or raw diff)
-        // Adjust multiplier based on asset class if needed. Here assuming standard CFDs: (Exit - Entry) * Lot * UnitSize
-        // For simplicity, let's just do raw price difference * lot_size for now,
-        // or just let user input P/L if they want. But goal says "profit/loss logic".
-        // Let's assume a basic (Exit - Entry) * Lot_Size for Long, reversed for Short.
+        
 
         const diff = type === 'Long' ? (exit_price - entry_price) : (entry_price - exit_price);
         profit_loss = diff * lot_size;
@@ -23,7 +19,7 @@ const calculateTradeData = (tradeData) => {
 
 exports.createTrade = async (req, res) => {
     try {
-        const tradeData = { ...req.body, userId: req.user._id }; // Assuming auth middleware adds user
+        const tradeData = { ...req.body, userId: req.user._id }; 
         const processedData = calculateTradeData(tradeData);
 
         const trade = new Trade(processedData);
